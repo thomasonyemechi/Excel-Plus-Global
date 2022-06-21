@@ -1,0 +1,1 @@
+<?php if($pro->adminLevel()==FALSE){ session_destroy(); header("location: login.php"); } ?>
