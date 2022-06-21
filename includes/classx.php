@@ -802,7 +802,7 @@ class Profile
         }
 
 
-        function processWallet($id,$amt,$type,$stage,$remark,$opt='')
+        function processWallet($id,$amt,$type,$level,$remark,$opt='')
         {
         	global $db;
         	$agent = $_COOKIE['agent']??'';
@@ -816,7 +816,7 @@ class Profile
 		$identity = $this->Uid();
 		if($type<5){$id=$identity;}
 		if($amt == 0){}else{
-			$sql = $db->query("INSERT INTO wallet (id,trno,sin,cos,tan,type,status,stage,remark,ctime,rep,opt,agent) VALUES ('$id','$trno','$sin','$amt','$tan','$type',2,'$stage','$remark','$ctime','$identity','$opt','$agent') ");
+			$sql = $db->query("INSERT INTO wallet (id,trno,sin,cos,tan,type,status,stage,remark,ctime,rep,opt,agent) VALUES ('$id','$trno','$sin','$amt','$tan','$type',2,'$level','$remark','$ctime','$identity','$opt','$agent') ");
 		} 
 		return;
 	}
@@ -1190,6 +1190,13 @@ function uidToSn($uid)
 		return;
 	}
 
+
+	function bonus($level, $opt='amount')
+	{
+		return sqLx('levelbonus', 'level', $level, $opt);
+	}
+
+
 	function PayWithPin(){
 		global $report, $count;
 		$pin= 26632; //$_POST['pin'];
@@ -1216,7 +1223,7 @@ function uidToSn($uid)
 		$sponsor  = $_SESSION['ref'];
 
 
-		$upline = $this->findUpline($sponsor);
+		$upline = $this->findUpline();
 		$que = $db->query("SELECT * FROM user WHERE sn = '$upline' ") or die(mysqli_error());
 		$ro = mysqli_fetch_array($que);
 		$a1 = $ro['sn'];
@@ -1227,43 +1234,47 @@ function uidToSn($uid)
 		$a6 = $ro['a5'];
 		$a7 = $ro['a6'];
 		$a8 = $ro['a7'];
+		$a9 = $ro['a8'];
+		$a10 = $ro['a9'];
+		$a11 = $ro['a10'];
+		$a12 = $ro['a11'];
+		$a13 = $ro['a12'];
+		$a14 = $ro['a13'];
+		$a15 = $ro['a14'];
+		$a16 = $ro['a15'];
+		$a17 = $ro['a16'];
+		$a18 = $ro['a17'];
 		$g = $ro['g']+1;
 //$firstname = getName(); 
 		$id = $this->win_hashs(8);
-		$sql = $db->query("INSERT INTO user(id,firstname,lastname,email,phone,sex,user,pass,sponsor,a1,a2,a3,a4,a5,a6,a7,a8,g,pin)
-			VALUES('$id','$firstname','$lastname','$email','$phone','$sex','$user','$pass','$sponsor','$a1', '$a2', '$a3', '$a4', '$a5', '$a6', '$a7', '$a8', '$g', '$pin')") or die('Cannot Connect to Server'); 
+		$sql = $db->query("INSERT INTO user(id,firstname,lastname,email,phone,sex,user,pass,sponsor,a1,a2,a3,a4,a5,a6,a7,a8, a9, a10, a11, a12,a13, a14, a15, a16, a17 , a18, g)
+			VALUES('$id','$firstname','$lastname','$email','$phone','$sex','$user','$pass','$sponsor','$a1', '$a2', '$a3', '$a4', '$a5', '$a6', '$a7', '$a8', '$a9', '$a10', '$a11', '$a12', '$a13', '$a14', '$a15', '$a16', '$a17', '$a18', '$g')") or die('Cannot Connect to Server'); 
 		unset($_SESSION['signup']);
+$report = 'Registration Successful. Placed directly under '.userName2($upline,'user');
+$this->emailerAllNew($email,$firstname);
+
+
+
 		$active = sqL1('user','a1',$upline);
 		$sp = sqL1('user','sponsor',$sponsor);
+$this->processWallet($sponsor,10,30,0,'Referral Bonus',$id);	//pay referal bonus
+$db->query("UPDATE user SET active='$active' WHERE sn='$upline' "); //update active
+$db->query("UPDATE user SET sp='$sp' WHERE sn='$sponsor' "); //update sponsor
 		$ctime = time();
-		$level = $active==2 ? 1 : 0 ;
-		$db->query("UPDATE user SET active='$active',level='$level' WHERE sn='$upline' "); 
-		$db->query("UPDATE user SET sp='$sp' WHERE sn='$sponsor' "); 
-		//$db->query("UPDATE pin SET status=1,id='$id',used='$ctime' WHERE pin='$pin' "); 
 
-		$level = userName2($sponsor,'level');
-		$this->processWallet($sponsor,1.3,11,$level,'Referral Bonus',$id);
-
-
-		$up2 = sqLx('user','sn',$upline,'a1'); $up2id = userName($up2,'id');
-		$active2 = sqL1('user','a2',$up2);
-		if($active2==4){$db->query("UPDATE user SET level=2,stage=2 WHERE sn='$up2' ");
-		$stage = userName2($up2,'stage');
-		$this->processWallet($up2,3,13,$stage,'Stage 1 Stepout Bonus',$id);
-		$team = $this->stageTeam($up2);//
-		if($team>0){$pbonus = $team*3; $this->processWallet($up2,$pbonus,12,$stage,'Stage 2 Matrix Bonus',$id);  }
-		$i=1; $sn = $up2; 
-		while($i<=6){ $e=$i++;  $type=12;
-			$sn = sqLx('user','sn',$sn,'a1'); if($sn>0){ 
-				$snstage = sqLx('user','sn',$sn,'stage'); $level = userName2($sn,'stage');
-				if($snstage==2 AND sqL2('wallet','id',$sn,'type',$type)<14){$this->processWallet($sn,3,$type,$level,'Stage 2 Matrix Bonus',$up2id);  }
+		if($active==2){
+			$i=1;
+			while($i<18){$e=$i++;
+				$target = 2**$e; $score = sqL1('user','a'.$e,$upline);
+				if($target==$score){$level = $e; $bonus = $this->bonus($e); $stage=$this->bonus($e,'stage');
+					$db->query("UPDATE user SET level='$e',stage='$stage' WHERE sn='$upline' "); 	//update level
+					$type = 10+$e;
+					$this->processWallet($upline,$bonus,$type,$level,'Matrix Bonus',$id);	//pay matrix bonus
+				 }else{return; }
+				$upline = sqLx('user','sn',$upline,'a1');
 			}
 		}
-		$this->updateLevel($upline);
-	}
-	$this->emailerAllNew($email,$firstname);
-
-	$report = 'Registration Successful. Placed directly under '.userName2($upline,'user');	
+		
 	return;
 }
 
@@ -1294,7 +1305,7 @@ function RegisterAuto($sponsor, $pin, $user)
 	$sponsor = sqLx('user','user',$sponsor,'sn');
 
 
-	$upline = $this->findUpline($sponsor);
+	$upline = $this->findUpline();
 	$que = $db->query("SELECT * FROM user WHERE sn = '$upline' ") or die(mysqli_error());
 	$ro = mysqli_fetch_array($que);
 	$a1 = $ro['sn'];
@@ -1371,7 +1382,7 @@ function RegisterAutox($sponsor, $pin, $username)
         // $password2 = $_SESSION['password2'];
         // $pwd = password_hash($password, PASSWORD_BCRYPT);
         // $pin = $_SESSION['pin'];
-	$upline = $this->findUpline($sponsor);
+	$upline = $this->findUpline();
 	$que = $db->query("SELECT * FROM user WHERE sn = '$upline' ") or die(mysqli_error());
 	$ro = mysqli_fetch_array($que);
 	$a1 = $ro['sn'];
@@ -1549,9 +1560,9 @@ function stageToEven($stage){
 
 
 
-function findUpline($sn){
+function findUpline(){
 	global $db;
-	$sql = $db->query("SELECT * FROM user WHERE (sn='$sn' OR a1='$sn' OR a2='$sn' OR a3='$sn' OR a4='$sn' OR a5='$sn' OR a6='$sn' OR a7='$sn' OR a8='$sn') AND active<2 ORDER BY g ASC,sn ASC LIMIT 1 ");
+	$sql = $db->query("SELECT * FROM user WHERE active<2 ORDER BY sn ASC LIMIT 1 ");
 	$row = mysqli_fetch_assoc($sql);
 	return $row['sn'];
 }

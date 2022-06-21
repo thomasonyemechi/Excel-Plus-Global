@@ -45,7 +45,7 @@ $signup = $_SESSION['signup']??0;
 							<div class="card-body">
 								<div class="p-4 rounded">
 									<div class="text-center">
-										<h3 class="">Sign Up</h3>
+										<h3 class="">Sign Up <?= $pro->findUpline(); ?></h3>
 										<p>Already have an account? <a href="signin.php">Sign in here</a>
 										</p>
 									</div>
