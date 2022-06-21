@@ -3,6 +3,8 @@ session_start(); ob_start();
 require_once('includes/headerquery.php');
 $signup = $_SESSION['signup']??0;
 
+@$ref = (isset($_GET['ref'])) ? sqLx('user', 'user', $_GET['ref'], 'sn') : '';
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,7 +47,7 @@ $signup = $_SESSION['signup']??0;
 							<div class="card-body">
 								<div class="p-4 rounded">
 									<div class="text-center">
-										<h3 class="">Sign Up <?= $pro->findUpline(); ?></h3>
+										<h3 class="">Sign Up</h3>
 										<p>Already have an account? <a href="signin.php">Sign in here</a>
 										</p>
 									</div>
@@ -91,7 +93,6 @@ $signup = $_SESSION['signup']??0;
 											
 											<div class="col-12">
 												<label for="inputSelectCountry" class="form-label">Referral Id</label>
-												<?php $ref = $_GET['ref']??'' ?>
 												<input type="text" name="ref" class="form-control" id="inputSelectCountry" placeholder="2134" value="<?= $ref ?>">
 													
 											</div>

@@ -92,7 +92,7 @@ session_start(); ob_start();
 							</thead>
 							<tbody>
 								<?php $i=1; 
-								$sql = $db->query("SELECT * FROM user WHERE a='$uidx' ORDER BY sn DESC "); 
+								$sql = $db->query("SELECT * FROM user WHERE sponsor='$uidx' ORDER BY sn DESC "); 
 								while($row = $sql->fetch_assoc()){ $e = $i++;
 
 									?>
@@ -176,14 +176,8 @@ session_start(); ob_start();
 
 
 						<label>Number of Accounts</label>
-						<select id="no" name="no" class="form-control" onchange="$('#charge').html('<br>Service Charge: $'+this.value*0.1+'<hr>')" required>
-							<option value="">Select Option...</option>
-							<?php $i=1; $end = sqL2('pin','rep',$uid,'status',0);
-							while($i<=$end){ $e=$i++; echo '<option>'.$e.'</option>'; }
-							?>
 
-						</select>
-						<span id="charge"></span>
+						<input type="number" name="no" class="form-control" placeholder="Number of accounts to register">
 						<div id="spin"></div>
 					</div>
 					<div class="modal-footer">

@@ -38,10 +38,10 @@ if(isset($_SESSION['user_id']) AND sqL1('user','id',$uid)==1){}else{header('loca
 						</li>
 						<li> <a href="transferfundsadmin.php"><i class="bx bx-right-arrow-alt"></i>Manage Transfers</a>
 						</li>
-<!-- 						<li> <a href="javascript:;"><i class="bx bx-right-arrow-alt"></i>Manage Incentives</a>
+						<li> <a href="manageincentive.php"><i class="bx bx-right-arrow-alt"></i>Manage Incentives</a>
 						</li>
 						
-						<li> <a href="javascript:;"><i class="bx bx-right-arrow-alt"></i>Manage Promotions</a>
+					<!-- 	<li> <a href="javascript:;"><i class="bx bx-right-arrow-alt"></i>Manage Promotions</a>
 						</li>
 						
 						<li> <a href="javascript:;"><i class="bx bx-right-arrow-alt"></i>Manage Announcements</a> -->
@@ -65,14 +65,14 @@ if(isset($_SESSION['user_id']) AND sqL1('user','id',$uid)==1){}else{header('loca
 					</a>
 					
 				</li>
-	<!-- 			<li>
+				<li>
 					<a href="automatedreg.php" class="">
 						<div class="parent-icon"><i class='bx bx-briefcase-alt-2'></i>
 						</div>
 						<div class="menu-title">Automated Multiple Registrations</div>
 					</a>
 					
-				</li>  -->
+				</li> 
 		<!-- 		<li>
 					<a href="managepin.php" class="">
 						<div class="parent-icon"><i class='bx bx-atom'></i>

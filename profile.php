@@ -368,7 +368,7 @@ session_start(); ob_start();
 										</div>
 										<div class="modal-body">
 
-											<div class="alert border-0 border-start border-5 border-primary alert-dismissible fade show py-2"><div class="d-flex align-items-center"><div class="font-35 text-primary"><i class="bx bxs-message-square-x"></i></div><div class="ms-3"><h6 class="mb-0 text-primary">NOTICE</h6><div>You can withdraw funds after 48 hours of joining GLG | <?php $join = (time()-strtotime(userName($uid,'created')))/(60*60); echo ceil(48-$join) ?> Hours Left</div></div></div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+											<div class="alert border-0 border-start border-5 border-primary alert-dismissible fade show py-2"><div class="d-flex align-items-center"><div class="font-35 text-primary"><i class="bx bxs-message-square-x"></i></div><div class="ms-3"><h6 class="mb-0 text-primary">NOTICE</h6><div>You can withdraw funds after 48 hours of joining EPG | <?php $join = (time()-strtotime(userName($uid,'created')))/(60*60); echo ceil(48-$join) ?> Hours Left</div></div></div><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
 
 										</div>
 										<div class="modal-footer">

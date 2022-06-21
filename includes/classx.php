@@ -129,21 +129,25 @@ class Profile
 		$stage = userName($uid,'stage');
 		$sponsor = userName($uid,'user');
 		
-		$pinall = sqL2('pin','rep',$uid,'status',0);
-		$cost = $no*0.1; 
+		// $pinall = sqL2('pin','rep',$uid,'status',0);
+		// $cost = $no*0.1; 
 		$balance = $this->wallet($uid);
-		if($pinall<$no){$report='Insufficient PINs.'; $count=1; return;}
-		if($balance<$cost){$report='Insufficient balance to pay service charge of $'.number_format($cost,2); $count=1; return;}
+		// if($pinall<$no){$report='Insufficient PINs.'; $count=1; return;}
+		// if($balance<$cost){$report='Insufficient balance to pay service charge of $'.number_format($cost,2); $count=1; return;}
 //debit cost
-		$this->processWallet($uid,$cost,5,$stage,'Auto Registration Charges',$no);
+		// $this->processWallet($uid,$cost,5,$stage,'Auto Registration Charges',$no);
 
 		$i=1;
 		while($i<=$no){ $e=$i++;
 			$pickuser = $this->pickUser($sponsor);
-			if($this->pickPin($uid,2)==1){$pickpin = $this->pickPin($uid);
-				$this->RegisterAuto($sponsor, $pickpin, $pickuser);
-			}else{$report = 'Operation incomplete! '.($e-1).' new accounts registered'; return; }
+			// if($this->pickPin($uid,2)==1){$pickpin = $this->pickPin($uid);
+				$this->RegisterAuto($sponsor, $pickuser);
+				$this->processWallet($uid,50,5,$stage,'Auto Registration Charges',$no);
+
+			// }else{$report = 'Operation incomplete! '.($e-1).' new accounts registered'; return; }
 		}
+
+		//
 
 		$report = 'Operation Complete and '.$no.' new accounts registered';
 		return;
@@ -1282,7 +1286,7 @@ $db->query("UPDATE user SET sp='$sp' WHERE sn='$sponsor' "); //update sponsor
 
 
 
-function RegisterAuto($sponsor, $pin, $user)
+function RegisterAuto($sponsor, $user)
 {
 	global $db, $report, $count;
 
@@ -1316,43 +1320,49 @@ function RegisterAuto($sponsor, $pin, $user)
 	$a6 = $ro['a5'];
 	$a7 = $ro['a6'];
 	$a8 = $ro['a7'];
+	$a9 = $ro['a8'];
+	$a10 = $ro['a9'];
+	$a11 = $ro['a10'];
+	$a12 = $ro['a11'];
+	$a13 = $ro['a12'];
+	$a14 = $ro['a13'];
+	$a15 = $ro['a14'];
+	$a16 = $ro['a15'];
+	$a17 = $ro['a16'];
+	$a18 = $ro['a17'];
 	$g = $ro['g']+1;
 
-	$id = $this->win_hashs(9);
-	$sql = $db->query("INSERT INTO user(id,firstname,lastname,email,phone,sex,address,state,country,user,pass,sponsor,a1,a2,a3,a4,a5,a6,a7,a8,g,pin,a)
-		VALUES('$id','$firstname','$lastname','$email','$phone','$sex','$address','$state','$country','$user','$pass','$sponsor','$a1', '$a2', '$a3', '$a4', '$a5', '$a6', '$a7', '$a8', '$g', '$pin','$sponsor')") or die('Cannot Connect to Server'); 
-	unset($_SESSION['signup']);
-	$active = sqL1('user','a1',$upline);
-	$sp = sqL1('user','sponsor',$sponsor);
-	$ctime = time();
-	$level = $active==3 ? 1 : 0 ;
-	$db->query("UPDATE user SET active='$active',level='$level' WHERE sn='$upline' "); 
-	$db->query("UPDATE user SET sp='$sp' WHERE sn='$sponsor' "); 
-	$db->query("UPDATE pin SET status=1,id='$id',used='$ctime' WHERE pin='$pin' "); 
 
-	$level = userName2($sponsor,'level');
-	$this->processWallet($sponsor,1.3,11,$level,'Referral Bonus',$id);
+			$id = $this->win_hashs(8);
+		$sql = $db->query("INSERT INTO user(id,firstname,lastname,email,phone,sex,user,pass,sponsor,a1,a2,a3,a4,a5,a6,a7,a8, a9, a10, a11, a12,a13, a14, a15, a16, a17 , a18, g)
+			VALUES('$id','$firstname','$lastname','$email','$phone','$sex','$user','$pass','$sponsor','$a1', '$a2', '$a3', '$a4', '$a5', '$a6', '$a7', '$a8', '$a9', '$a10', '$a11', '$a12', '$a13', '$a14', '$a15', '$a16', '$a17', '$a18', '$g')") or die('Cannot Connect to Server'); 
+		unset($_SESSION['signup']);
 
 
-	$up2 = sqLx('user','sn',$upline,'a1'); $up2id = userName($up2,'id');
-	$active2 = sqL1('user','a2',$up2);
-	if($active2==9){$db->query("UPDATE user SET level=2,stage=2 WHERE sn='$up2' ");
-	$stage = userName2($up2,'stage');
-	$this->processWallet($up2,3,13,$stage,'Stage 1 Stepout Bonus',$id);
-	$team = $this->stageTeam($up2);
-	if($team>0){$pbonus = $team*3; $this->processWallet($up2,$pbonus,12,$stage,'Stage 2 Matrix Bonus',$id);  }
-	$i=1; $sn = $up2; 
-	while($i<=6){ $e=$i++;  $type=12;
-		$sn = sqLx('user','sn',$sn,'a1'); if($sn>0){ 
-			$snstage = sqLx('user','sn',$sn,'stage'); $level = userName2($sn,'stage');
-			if($snstage==2 AND sqL2('wallet','id',$sn,'type',$type)<39){$this->processWallet($sn,3,$type,$level,'Stage 2 Matrix Bonus',$up2id);  }
+
+		$active = sqL1('user','a1',$upline);
+		$sp = sqL1('user','sponsor',$sponsor);
+$this->processWallet($sponsor,10,30,0,'Referral Bonus',$id);	//pay referal bonus
+$db->query("UPDATE user SET active='$active' WHERE sn='$upline' "); //update active
+$db->query("UPDATE user SET sp='$sp' WHERE sn='$sponsor' "); //update sponsor
+		$ctime = time();
+
+		if($active==2){
+			$i=1;
+			while($i<18){$e=$i++;
+				$target = 2**$e; $score = sqL1('user','a'.$e,$upline);
+				if($target==$score){$level = $e; $bonus = $this->bonus($e); $stage=$this->bonus($e,'stage');
+					$db->query("UPDATE user SET level='$e',stage='$stage' WHERE sn='$upline' "); 	//update level
+					$type = 10+$e;
+					$this->processWallet($upline,$bonus,$type,$level,'Matrix Bonus',$id);	//pay matrix bonus
+				 }else{return; }
+				@$upline = sqLx('user','sn',$upline,'a1');
+			}
 		}
-	}
-	$this->updateLevel($upline);
-}
-//$this->emailerAllNew($email,$firstname);
+		
+	return;
 
-	// $report = 'Registration Successful. Placed directly under '.userName2($upline,'user');	
+
 return;
 }
 

@@ -344,7 +344,7 @@ session_start(); ob_start();
 							<h5 class="mb-0">Referral Link</h5>
 						</div>
 						<hr/>
-						https://thegoodlifeglobal.com/?ref=<?= $uidx ?>
+						https://excelplusglobal.com/signup?ref=<?= $uidx ?>
 </div>
 </div>						
 
