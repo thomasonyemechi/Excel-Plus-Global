@@ -70,8 +70,9 @@ session_start(); ob_start();
 										<tr>
 											<th>S/N</th>
 
+											
+											<th>Stage</th>
 											<th>Level</th>
-											<th>Statge</th>
 											<th>Amount</th>
 											<th>Matrix</th>
 											<th>Stepout</th>
@@ -92,8 +93,9 @@ session_start(); ob_start();
 												<td><?php echo $e; ?></td>
 
 
-												<td><?php echo $row['level']; ?> </td>
+												
 												<td><?php echo $row['stage']; ?> </td>
+												<td><?php echo $row['stagelevel']; ?> </td>
 												<td><?php echo $row['amount']; ?> </td>
 												<td><?php echo $row['matrix']; ?> </td>
 												<td><?php echo $row['stepout']; ?> </td>
@@ -128,15 +130,16 @@ session_start(); ob_start();
 								<div class="modal-body">
 
 										<div class="row">
+										    		<div class="col-6">
+												<label>Stage</label>
+												<input type="number" name="stage" class="form-control" disabled>
+											</div>
 											<div class="col-6">
 												<label>Level</label>
 												<input type="number" name="level" class="form-control" disabled>
 												<input type="hidden" name="sn">
 											</div>
-											<div class="col-6">
-												<label>Stage</label>
-												<input type="number" name="stage" class="form-control" disabled>
-											</div>
+									
 
 
 
@@ -218,7 +221,7 @@ session_start(); ob_start();
 
 					modal.modal('show');
 
-					$(modal).find('input[name="level"]').val(data.level)
+					$(modal).find('input[name="level"]').val(data.stagelevel)
 					$(modal).find('input[name="stage"]').val(data.stage)
 					$(modal).find('input[name="matrix"]').val(data.matrix)
 					$(modal).find('input[name="stepout"]').val(data.stepout)

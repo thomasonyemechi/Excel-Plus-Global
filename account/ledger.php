@@ -54,7 +54,38 @@ session_start(); ob_start();
 					</div>
 				</div>					
 
-
+<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
+    						<?php $i=11; $v=0; $r = $pro->walletRange($uid,11,14); while($i<=14){$e=$i++;  ?>
+						<div class="col"><a href="?index=<?= md5($e) ?>">
+							<div class="card radius-10 bg-primary bg-gradient">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div>
+											<p class="mb-0 text-white"><?= $pro->walletRemark($e) ?></p>
+											<h4 class="my-1 text-white">$<?php $a = $pro->wallet($uid,$e); $v += $a; echo number_format($a,2) ?> <small class="text-success"><?php echo number_format(100*$a/$r,2) ?>%</small></h4>
+										</div>
+										<div class="text-white ms-auto font-35"><i class='bx bx-comment-detail'></i>
+										</div>
+									</div>
+								</div>
+							</div></a>
+						</div>
+						<?php } ?>
+						<div class="col"><a href="">
+							<div class="card radius-10 bg-success bg-gradient">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div>
+											<p class="mb-0 text-white">Total Earning</p>
+											<h4 class="my-1 text-white">$<?php echo number_format($r,2) ?> <small class="text-danger"><?php echo number_format(100,2) ?>%</small></h4>
+										</div>
+										<div class="text-white ms-auto font-35"><i class='bx bx-comment-detail'></i>
+										</div>
+									</div>
+								</div>
+							</div></a>
+						</div>
+    </div>
 <div class="card">
 					<div class="card-body">
 						<div class="card-title">
@@ -81,7 +112,9 @@ session_start(); ob_start();
                                     <tbody>
                                    <?php
                                           $i=1;
-                                          $sql = $db->query("SELECT * FROM wallet WHERE id='$uid' ORDER BY sn DESC LIMIT 200 "); 
+                                          $sql = $db->query("SELECT * FROM wallet WHERE id='$uid' ORDER BY sn DESC LIMIT 500 "); 
+                                          if(isset($_GET['index'])){$type = $_GET['index'];
+                                          $sql = $db->query("SELECT * FROM wallet WHERE id='$uid' AND md5(type)='$type' ORDER BY sn DESC LIMIT 200 ");}
                                           while($row = $sql->fetch_assoc()) { $e = $i++;
                                           $type = $row['cos']>0 ? 'Credit' : 'Debit';
                                       ?>

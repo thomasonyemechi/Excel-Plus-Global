@@ -189,10 +189,10 @@
                                 <p>This is the very first stage of the entire compensation plan.
 You need just 6 persons to be placed under you by the system to complete
 this stage.
-System place on your two legs earns you $5 each making $10. 
-Personal referral of your legs earn you $15 each making $30.
+System place on your two legs earns you $2 each making $4. 
+Personal referral of your legs earn you $10 each making $20.
 STEP OUT BOUNS OF $10 </p>
-                                <div class="link"><span>Total earnng of $40</span></div>
+                                <div class="link"><span>Total earnng of $34</span></div>
                             </div>
                         </div>
                     </div>
@@ -211,8 +211,8 @@ STEP OUT BOUNS OF $10 </p>
                                 <p>You need just 14 persons to be placed under you by the system to cycle out of
 this stage. Each person who joins you in your level 2 you earn $20 each making $80
 Each person who join you in leave 3 you earn $20 each making $160
-STEP OUT BOUNS OF $60.</p>
-                                <div class="link"><span>TOTAL EARNING IN SUPERVISOR STAGE IS $300</span></div>
+STEP OUT BOUNS OF $10 + Incentive worth $100.</p>
+                                <div class="link"><span>TOTAL EARNING IN SUPERVISOR STAGE IS $350</span></div>
                             </div>
                         </div>
                     </div>
@@ -231,8 +231,8 @@ STEP OUT BOUNS OF $60.</p>
                                 <p>You need just 14 persons to be placed under you by the system
 to cycle out of this stage.
 In this stage you earn from level 1 to level 3
-Any one who joins you in the stage you earn $50 each </p>
-                                <div class="link"><span>TOTAL EARNINGS IN THIS STAGE IS $700</span></div>
+Any one who joins you in the stage you earn $50 each + Incentive worth $300 </p>
+                                <div class="link"><span>TOTAL EARNINGS IN THIS STAGE IS $1,000</span></div>
                             </div>
                         </div>
                     </div>
@@ -250,9 +250,9 @@ Any one who joins you in the stage you earn $50 each </p>
                                 <h3><a href="">Stage 4: CONSULTANT</a></h3>
                                 <p>You need just 14 persons to be placed under you by the system
 to cycle out of this stage. In this stage you earn from level 1 to level 3
-Any one who joins you in this stage you earn $300 each
+Any one who joins you in this stage you earn $100 each + Incentive worth $2,600
 </p>
-                                <div class="link"><span>TOTAL EARNINGS IN THIS STAGE IS $2,400 </span></div>
+                                <div class="link"><span>TOTAL EARNINGS IN THIS STAGE IS $4,000 </span></div>
                             </div>
                         </div>
                     </div>
@@ -271,9 +271,9 @@ Any one who joins you in this stage you earn $300 each
                                 <p>You need just 14 persons to be placed under you by the system
 to cycle out of this stage.
 In this stage you earn from level 1 to level 3
-Any one who joins you in this stage you earn $500 each
+Any one who joins you in this stage you earn $200 each + Incentive worth $7,000
 </p>
-                                <div class="link"><span>TOTAL EARNINGS IN THIS STAGE IS $7000</span></div>
+                                <div class="link"><span>TOTAL EARNINGS IN THIS STAGE IS $9,800</span></div>
                             </div>
                         </div>
                     </div>
@@ -292,9 +292,9 @@ Any one who joins you in this stage you earn $500 each
                                 <p>You need just 14 persons to be placed under you by the
 system to cycle out of this stage.
 In this stage you earn from level 1 to level 3
-Any one who joins you in this stage you earn $700 each
+Any one who joins you in this stage you earn $500 each + Incentive worth $21,500
 </p>
-                                <div class="link"><span>TOTAL EARNINGS IN THIS STAGE IS $9,800</span></div>
+                                <div class="link"><span>TOTAL EARNINGS IN THIS STAGE IS $28,250</span></div>
                             </div>
                         </div>
                     </div>

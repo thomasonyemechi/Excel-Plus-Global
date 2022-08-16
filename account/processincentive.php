@@ -69,30 +69,30 @@ session_start(); ob_start();
 										<tr>
 											<th>S/N</th>
 											<th>User</th>
+											<th>Stage</th>
 											<th>Level</th>
-											<th>Statge</th>
 											<th>Incentive</th>
-											<th>Item</th>
 											<th></th>
 
 										</tr>
 									</thead>
 									<tbody>
-										<?php
+										<?php 
+										error_reporting(1);
 										$i=1;
 										$sql = $db->query("SELECT * FROM wallet WHERE type='14' AND incentive=0 LIMIT 200  "); 
-										while($row = $sql->fetch_assoc()) { $e = $i++;
+										while($row = $sql->fetch_assoc()) { $e = $i++; 
+										$level = $row['level'];
+                                        $sql2 = $db->query("SELECT * FROM levelbonus WHERE level=$level  ");		
+                                        $lel = mysqli_fetch_array($sql2);
 											?>
 											<tr>
 												<td><?php echo $e; ?></td>
-
-
-												<td><?php echo userName($row['id']); ?> </td>
-												<td><?php echo $row['level']; ?> </td>
-												<td><?php echo $row['stage']; ?> </td>
-												<td><?php echo $row['incentive']; ?> </td>
-												<td><?php echo $row['item']; ?> </td>
-												<td> <button class="btn btn-primary btn-sm" name="processincentive" value="<?=  $row['sn'] ?>" >Mark as Processed</button> </td>
+												<td><?php echo userName($row['id']).' ('.userName($row['id'], 'user').',  '.userName($row['id'], 'sn').' )'; ?> </td>
+							                    <td><?=  $lel['stage'] ?></td>
+							                    <td><?=  $lel['stagelevel'] ?></td>
+												<td><?php echo $row['remark']; ?> </td>
+												<td><form method="post"> <button class="btn btn-primary btn-sm" name="processincentive" value="<?=  $row['sn'] ?>" >Mark as Processed</button> </form></td>
 											</tr>
 											<?php } ?>
 										</tbody>
@@ -117,10 +117,7 @@ session_start(); ob_start();
 										<tr>
 											<th>S/N</th>
 											<th>User</th>
-											<th>Level</th>
-											<th>Statge</th>
 											<th>Incentive</th>
-											<th>Item</th>
 											<th>Date</th>
 
 										</tr>
@@ -133,13 +130,8 @@ session_start(); ob_start();
 											?>
 											<tr>
 												<td><?php echo $e; ?></td>
-
-
 												<td><?php echo userName($row['id']); ?> </td>
-												<td><?php echo $row['level']; ?> </td>
-												<td><?php echo $row['stage']; ?> </td>
-												<td><?php echo $row['incentive']; ?> </td>
-												<td><?php echo $row['item']; ?> </td>
+												<td><?php echo $row['remark']; ?> </td>
 												<td> <?= date('j M, Y',$row['incentive']);  ?> </td>
 											</tr>
 											<?php } ?>

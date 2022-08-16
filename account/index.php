@@ -187,8 +187,32 @@ session_start(); ob_start();
 								<div class="card-body">
                                     <div class="d-flex align-items-center">
 										<div>
-											<p class="mb-0 text-secondary">Stepout Bonuses</p>
+											<p class="mb-0 text-secondary">Stepout Bonus</p>
 											<h4 class="mb-0">$<?= number_format($pro->wallet($uid,13),2) ?></h4>
+										</div>
+										<div class="widgets-icons bg-light-success text-success ms-auto"><i class='bx bxs-category' ></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card radius-10 border shadow-none">
+								<div class="card-body">
+                                    <div class="d-flex align-items-center">
+										<div>
+											<p class="mb-0 text-secondary">Incentive Bonus</p>
+											<h4 class="mb-0">$<?= number_format($pro->wallet($uid,14),2) ?></h4>
+										</div>
+										<div class="widgets-icons bg-light-success text-success ms-auto"><i class='bx bxs-category' ></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card radius-10 border shadow-none">
+								<div class="card-body">
+                                    <div class="d-flex align-items-center">
+										<div>
+											<p class="mb-0 text-secondary">Total Earnings</p>
+											<h4 class="mb-0">$<?= number_format($pro->walletRange($uid,11,14),2) ?></h4>
 										</div>
 										<div class="widgets-icons bg-light-success text-success ms-auto"><i class='bx bxs-category' ></i>
 										</div>

@@ -215,7 +215,7 @@ session_start(); ob_start();
      							<td>${index+1}</td>
      							<td><a href="javascript:;" class="showuser" data-sn="${user.sn}">${user.name} </a></td>
      							<td>${user.username}</td> 
-     							<td>${user.id}</td>
+     							<td>${user.sn}</td>
      							<td>${user.stage}</td>
      							<td>${user.team}</td>
      							<td>${user.gen}</td>
