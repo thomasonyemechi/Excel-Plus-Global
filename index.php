@@ -1,438 +1,455 @@
-<?php
-session_start(); ob_start();
-?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
+
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--favicon-->
-	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
-	<!--plugins-->
-	<link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
-	<link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
-	<link href="assets/plugins/highcharts/css/highcharts.css" rel="stylesheet" />
-	<link href="assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
-	<link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
-	<link href="assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-	<!-- loader-->
-	<link href="assets/css/pace.min.css" rel="stylesheet" />
-	<script src="assets/js/pace.min.js"></script>
-	<!-- Bootstrap CSS -->
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
-	<link href="assets/css/bootstrap-extended.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-	<link href="assets/css/app.css" rel="stylesheet">
-	<link href="assets/css/icons.css" rel="stylesheet">
-	<!-- Theme Style CSS -->
-	<link rel="stylesheet" href="assets/css/dark-theme.css" />
-	<link rel="stylesheet" href="assets/css/semi-dark.css" />
-	<link rel="stylesheet" href="assets/css/header-colors.css" />
-	<title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <title>EXCEL PLUS GLOBAL</title>
+
+<!-- Fav Icon
+<link rel="icon" href="lanasset/images/favicon.ico" type="image/x-icon">
+-->
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i&amp;display=swap" rel="stylesheet">
+
+<!-- Stylesheets -->
+<link href="lanasset/css/font-awesome-all.css" rel="stylesheet">
+<link href="lanasset/css/flaticon.css" rel="stylesheet">
+<link href="lanasset/css/owl.css" rel="stylesheet">
+<link href="lanasset/css/bootstrap.css" rel="stylesheet">
+<link href="lanasset/css/jquery.fancybox.min.css" rel="stylesheet">
+<link href="lanasset/css/animate.css" rel="stylesheet">
+<link href="lanasset/css/color.css" rel="stylesheet">
+<link href="lanasset/css/rtl.css" rel="stylesheet">
+<link href="lanasset/css/style.css" rel="stylesheet">
+<link href="lanasset/css/responsive.css" rel="stylesheet">
+<link rel="icon" type="text/css" href="lanasset/images/favicon.png">
+
 </head>
 
-<body>
-	<!--wrapper-->
-	<div class="wrapper">
-		
-			<?php include('nav.php') ?>
-		<!--start page wrapper -->
-		<div class="page-wrapper">
-			<div class="page-content">
-			
-			  <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
-			  	<div class="col">
-						<div class="card radius-10 bg-primary bg-gradient">
-							<div class="card-body">
-								<div class="d-flex align-items-center">
-									<div>
-										<p class="mb-0 text-white">Total Team</p>
-										<h4 class="my-1 text-white"><?= number_format($pro->userTeam($uidx)) ?></h4>
-									</div>
-									<div class="text-white ms-auto font-35"><i class='bx bx-user-pin'></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card radius-10 bg-success bg-gradient">
-							<div class="card-body">
-								<div class="d-flex align-items-center">
-									<div>
-										<p class="mb-0 text-white">Total Income</p>
-										<h4 class="my-1 text-white"><?= money($pro->userIncome($uid)) ?></h4>
-									</div>
-									<div class="text-white ms-auto font-35"><i class='bx bx-dollar'></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-						<div class="col">
-						<div class="card radius-10 bg-danger bg-gradient">
-							<div class="card-body">
-								<div class="d-flex align-items-center">
-									<div>
-										<p class="mb-0 text-white">Total Debit</p>
-										<h4 class="my-1 text-white"><?= money(abs($pro->userDebit($uid))) ?></h4>
-									</div>
-									<div class="text-white ms-auto font-35"><i class='bx bx-comment-detail'></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-<div class="col">
-						<div class="card radius-10 bg-warning bg-gradient">
-							<div class="card-body">
-								<div class="d-flex align-items-center">
-									<div>
-										<p class="mb-0 text-dark">Account Balance</p>
-										<h4 class="text-dark my-1"><?= money($pro->wallet($uid)) ?></h4>
-									</div>
-									<div class="text-dark ms-auto font-35"><i class='bx bx-cart-alt'></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				
-			  </div><!--end row-->
-			  
 
-	
-
-			   <div class="row">
-				 <div class="col-12 col-xl-4 d-flex">
-					<div class="card radius-10 w-100">
-						<div class="card-body">
-							<div class="d-flex align-items-center">
-								<div>
-									<h5 class="mb-0">New Referrals</h5>
-								</div>
-								<div class="font-22 ms-auto"><i class='bx bx-dots-horizontal-rounded'></i>
-								</div>
-							</div>
-						</div>
-							<div class="customers-list p-2 mb-3">
-								<?php
-                                          $i=1;
-                                          $sql = $db->query("SELECT * FROM user WHERE sponsor='$uidx' ORDER BY sn DESC LIMIT 20 "); 
-                                          while($row = $sql->fetch_assoc()) { ?>
-					
-							<div class="customers-list-item d-flex align-items-center border-top border-bottom p-2 cursor-pointer">
-								<div class="">
-									<div class="widgets-icons bg-light-secondary text-danger ms-auto"><i class='bx bxs-group' ></i>
-										</div>
-								</div>
-								<div class="ms-2">
-									<h6 class="mb-1 font-14"><?= userName($row['id']) ?></h6>
-									<p class="mb-0 font-13 text-secondary"><?= userName($row['id'],'email') ?></p>
-								</div>
-								<div class="list-inline d-flex customers-contacts ms-auto">	
-									
-									<a href="geneology.php?user=<?= $row['sn'] ?>" class="list-inline-item"><i class='bx bx-dots-vertical-rounded'></i></a>
-								</div>
-							</div>
-							
-						
-					<?php } ?></div>
-					</div>
-				 </div>
-				
+<!-- page wrapper -->
+<body class="boxed_wrapper ltr">
 
 
-				 <div class="col-12 col-xl-4 d-flex">
-					<div class="card radius-10 w-100 overflow-hidden">
-						<div class="card-body">
-							<div class="d-flex align-items-center">
-								<div>
-									<h5 class="mb-0">Account Statistics</h5>
-								</div>
-								<div class="font-22 ms-auto"><i class='bx bx-dots-horizontal-rounded'></i>
-								</div>
-							</div>
-						</div>
-
-						<div class="store-metrics p-3 mb-3">
-							
-                            <div class="card mt-0 radius-10 border shadow-none">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Referral Bonus</p>
-											<h4 class="mb-0">$<?= number_format($pro->wallet($uid,11),2) ?></h4>
-										</div>
-										<div class="widgets-icons bg-light-primary text-primary ms-auto"><i class='bx bxs-shopping-bag' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="card radius-10 border shadow-none">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Matrix Bonus</p>
-											<h4 class="mb-0">$<?= number_format($pro->wallet($uid,12),2) ?></h4>
-										</div>
-										<div class="widgets-icons bg-light-danger text-danger ms-auto"><i class='bx bxs-group' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="card radius-10 border shadow-none">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Stepout Bonuses</p>
-											<h4 class="mb-0">$<?= number_format($pro->wallet($uid,13),2) ?></h4>
-										</div>
-										<div class="widgets-icons bg-light-success text-success ms-auto"><i class='bx bxs-category' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="card radius-10 border shadow-none">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">PIN Purchase</p>
-											<h4 class="mb-0">$<?= number_format(abs($pro->wallet($uid,3)),2) ?></h4>
-										</div>
-										<div class="widgets-icons bg-light-info text-info ms-auto"><i class='bx bxs-cart-add' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="card radius-10 border shadow-none">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Fund Transfered</p>
-											<h4 class="mb-0">$<?= number_format(abs($pro->wallet($uid,2)),2) ?></h4>
-										</div>
-										<div class="widgets-icons bg-light-info text-info ms-auto"><i class='bx bxs-cart-add' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="card radius-10 border shadow-none">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Fund Received</p>
-											<h4 class="mb-0">$<?= number_format($pro->wallet($uid,20),2) ?></h4>
-										</div>
-										<div class="widgets-icons bg-light-warning text-warning ms-auto"><i class='bx bxs-user-account' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="card radius-10 border shadow-none mb-0">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Cash Withdrawn</p>
-											<h4 class="mb-0">$<?= number_format(abs($pro->wallet($uid,1)+$pro->wallet($uid,4)),2) ?></h4>
-										</div>
-										<div class="widgets-icons bg-light-warning text-warning ms-auto"><i class='bx bxs-user-account' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				 </div>
-				 <div class="col-12 col-xl-4 d-flex">
-					<div class="card radius-10 w-100 overflow-hidden">
-						<div class="card-body">
-							<div class="d-flex align-items-center">
-								<div>
-									<h5 class="mb-0">Account Information</h5>
-								</div>
-								<div class="font-22 ms-auto"><i class='bx bx-dots-horizontal-rounded'></i>
-								</div>
-							</div>
-						</div>
-
-						<div class="product-list p-3 mb-3">
-							
-                            <div class="card mt-0 radius-10 border shadow-none">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Stage Title</p>
-											<h4 class="mb-0"><?= $pro->stageTitle($stage) ?></h4>
-										</div>
-										<div class="widgets-icons bg-light-primary text-primary ms-auto"><i class='bx bxs-shopping-bag' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="card radius-10 border shadow-none">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Stage</p>
-											<h4 class="mb-0">Stage <?= $stage ?></h4>
-										</div>
-										<div class="widgets-icons bg-light-danger text-danger ms-auto"><i class='bx bxs-group' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="card radius-10 border shadow-none">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Stage Level</p>
-											<h4 class="mb-0">Level <?php $level = userName($uid,'level'); echo $pro->stageLevel($level) ?></h4>
-										</div>
-										<div class="widgets-icons bg-light-success text-success ms-auto"><i class='bx bxs-category' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="card radius-10 border shadow-none">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Stage Team</p>
-											<h4 class="mb-0"><?php $team = $pro->stageTeam($uidx); echo $team ?></h4>
-										</div>
-										<div class="widgets-icons bg-light-info text-info ms-auto"><i class='bx bxs-cart-add' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="card radius-10 border shadow-none">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Stage Progress</p>
-											<h4 class="mb-0"><?php $max = $stage>1 ? 39 : 12;   echo number_format(100*$team/$max,2) ?>%</h4>
-										</div>
-										<div class="widgets-icons bg-light-warning text-warning ms-auto"><i class='bx bxs-user-account' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="card radius-10 border shadow-none mb-0">
-								<div class="card-body">
-                                    <div class="d-flex align-items-center">
-										<div>
-											<p class="mb-0 text-secondary">Direct Referrals</p>
-											<h4 class="mb-0"><?php echo number_format(userName($uid,"sp")) ?></h4>
-										</div>
-										<div class="widgets-icons bg-light-warning text-warning ms-auto"><i class='bx bxs-user-account' ></i>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				 </div>
-</div><!--end row-->
-				
-				
-<div class="card">
-					<div class="card-body">
-						<div class="card-title">
-							<h5 class="mb-0">Referral Link</h5>
-						</div>
-						<hr/>
-						https://excelplusglobal.com/signup?ref=<?= $uidx ?>
-</div>
-</div>						
 
 
-<div class="card">
-					<div class="card-body">
-						<div class="card-title">
-							<h5 class="mb-0">Recent Transactions</h5>
-						</div>
-						<hr/>
+    <?php include('header1.php')  ?>
 
-                               <div class="table-responsive mt-3">
-								  <table id="example" class="table table-bordered table-striped table-sm">
-                                    <thead>
-                                        <tr>
-                                          <th>S/N</th>
-                                         
-                                          <th>Date</th>
-                                          <th>Amount</th>
-                                      
-                                          <th>Type</th>
-                                          <th>Remark</th>
-                                         <th>Status</th> 
-                                         <th>Reference</th> 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                   <?php
-                                          $i=1;
-                                          $sql = $db->query("SELECT * FROM wallet WHERE id='$uid' ORDER BY sn DESC LIMIT 200 "); 
-                                          while($row = $sql->fetch_assoc()) { $e = $i++;
-                                          $type = $row['cos']>0 ? 'Credit' : 'Debit';
-                                      ?>
-                                        <tr>
-                                          <td><?php echo $e; ?></td>
-                                          
-                                       
-                                          <td><?php echo date('d/m/y', $row['ctime']); ?></td>
-                                          <td>$<?php echo number_format(abs($row['cos']),2) ?></td>
-                                     
-                                          <td><?php echo $type; ?></td>
-                                          <td><?php echo $row['remark']; ?> </td>
-                                     <td><?php echo $pro->walletStatus($row['status']); ?></td> 
-                                        <td><?php  echo $row['trno'] ?></td></tr>
-                                   <?php } ?>
-                                      </tbody>
-                                </table>
-					</div>
-				</div><!--end row-->
-			
-			</div>
-		</div>
-		<!--end page wrapper -->
-		<?php include('foot.php') ?>
+    <!-- Mobile Menu  -->
+    <div class="mobile-menu">
+      <!--   <div class="menu-backdrop"></div> -->
+      <div class="close-btn"><i class="fas fa-times"></i></div>
+      
+      <nav class="menu-box">
+        <div class="nav-logo"><a href="index.php"><img src="lanasset/images/logo.png" alt="" title=""></a></div>
+        <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
+        
+    </nav>
+</div><!-- End Mobile Menu -->
 
-	</div>
-	<!--end wrapper-->
-	
-	<!-- Bootstrap JS -->
-	<script src="assets/js/bootstrap.bundle.min.js"></script>
-	<!--plugins-->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
-	<script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
-	<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-	<script src="assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
-	<script src="assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="assets/plugins/highcharts/js/highcharts.js"></script>
-	<script src="assets/plugins/highcharts/js/exporting.js"></script>
-	<script src="assets/plugins/highcharts/js/variable-pie.js"></script>
-	<script src="assets/plugins/highcharts/js/export-data.js"></script>
-	<script src="assets/plugins/highcharts/js/accessibility.js"></script>
-	<script src="assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
-		<script src="assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-	<script src="assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#example').DataTable();
-		  } );
-	</script>
-	<script src="assets/js/index2.js"></script>
-	<!--app JS-->
-	<script src="assets/js/app.js"></script>
-	<script>
-		new PerfectScrollbar('.customers-list');
-		new PerfectScrollbar('.store-metrics');
-		new PerfectScrollbar('.product-list');
-	</script>
-</body>
+
+<!-- banner-section -->
+<section class="banner-section">
+    <div class="banner-carousel owl-theme owl-carousel owl-dots-none">
+
+        <div class="slide-item">
+            <div class="image-layer" style="background-image:url(lanasset/images/banner/b1.jpg)"></div>
+            <div class="auto-container">
+                <div class="content-box centred">
+                    <ul class="list-item clearfix">
+                        <li>.&nbsp;<a href="">Experienced</a>&nbsp;.&nbsp;</li>
+                        <li><a href="">Specialized</a>&nbsp;.&nbsp;</li>
+                        <li><a href="">Professional</a>&nbsp;.&nbsp;</li>
+                    </ul>
+                    <h1>Join the league of <br />Self Reliant People</h1>
+            
+                    </div> 
+                </div>
+            </div>
+
+
+            <div class="slide-item">
+                <div class="image-layer" style="background-image:url(lanasset/images/banner/banner-7.jpg)"></div>
+                <div class="auto-container">
+                    <div class="content-box">
+                        <h5>Register with EPG for</h5>
+                        <h1>Financial Freedom<br />& Lasting Self Reliance</h1>
+                    </div>  
+                </div>
+            </div>
+
+            <div class="slide-item">
+                <div class="image-layer" style="background-image:url(lanasset/images/banner/banner-6.jpg)"></div>
+                <div class="auto-container">
+                    <div class="content-box">
+                        <h5>Get empowered to Live</h5>
+                        <h1>Your Dream Life <br />With Excitment</h1>
+                  </div>  
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- banner-section end -->
+
+
+  <!-- info-section -->
+  <section class="info-section p-0">
+      
+  </section>
+  <!-- info-section end -->
+
+<!-- about-section -->
+<section class="about-section bg-color-1 "> 
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-6 col-md-12 col-sm-12 video-column">
+                <div class="video-inner">
+                    <figure class="image-box"><img src="lanasset/images/resource/1.jpg" alt=""></figure>
+               <!--      <div class="video-btn">
+                        <a href="https://www.youtube.com/watch?v=wtGMyEB1KqA&amp;t=28s" class="lightbox-image" data-caption="" style="background-image: url(lanasset/images/resource/btn-bg.png);"><i class="fas fa-play"></i></a>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                <div id="content_block_one">
+                    <div class="content-box">
+                        <div class="sec-title left">
+                            <h5>About EPG</h5>
+                            <h2>Africa's first One Link Network</h2>
+                        </div>
+                        <div class="text">
+                            <p></p>
+                        </div>
+                        <div class="inner-box">
+                            <div class="single-item">
+                                <div class="icon-box">
+                                    <span class="bg-box"></span>
+                                    <i class="flaticon-computer-1"></i>
+                                </div>
+                                <h4><a href="javascript:;">VISSION OF EXCEL PLUS</a></h4>
+                                <p>EPG Marketing Ltd is an organization with a mandate of empowering people globally to live the life of their dream through consistent financial freedom.</p>
+                            </div>
+                            <div class="single-item">
+                                <div class="icon-box">
+                                    <span class="bg-box"></span>
+                                    <i class="flaticon-browser-1"></i>
+                                </div>
+                                <h4><a href="javascript:;">MISSION OF EXCEL PLUS</a></h4>
+                                <p>With a team of Co-Founders with rich experience spanning over
+a decade, EPG bring to you an unprecedented “one link system”
+which combines the popular Matrix and the Monoline incentive
+plan. This, we believe, will help reduce frustrations in the MLM
+space in terms of recruitment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about-section end -->
+
+
+
+
+  <!-- feature-section -->
+  <section class="feature-section p-5">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                <div class="feature-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                    <div class="inner-box">
+                        <figure class="image-box"><img src="lanasset/images/resource/feature-1.jpg" alt=""></figure>
+                        <div class="lower-content">
+                            <div class="inner">
+                                <h3>Financial Empowerment</h3>
+                                <!-- <a href="javascript:;"><span>Empowering you to face the future with boldness</span></a> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                <div class="feature-block-one wow fadeInUp animated animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+                    <div class="inner-box">
+                        <figure class="image-box"><img src="lanasset/images/resource/feature-2.jpg" alt=""></figure>
+                        <div class="lower-content">
+                            <div class="inner">
+                                <h3>Free Skill Acquisition</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 feature-block">
+                <div class="feature-block-one wow fadeInUp animated animated" data-wow-delay="600ms" data-wow-duration="1500ms">
+                    <div class="inner-box">
+                        <figure class="image-box"><img src="lanasset/images/resource/feature-3.jpg" alt=""></figure>
+                        <div class="lower-content">
+                            <div class="inner">
+                                <h3>Business Modeling</h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- feature-section end -->
+
+
+
+
+<!-- service-section -->
+<section class="service-section">
+    <div class="auto-container">
+        <div class="title-box">
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-12 col-sm-12 title-column">
+                    <div class="sec-title right">
+                                    <h5>JOIN US</h5>
+                        <h2>WHY MUST ONE JOIN EXCEL PLUS?</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 text-column">
+                    <div class="text">
+                        <p>You can enjoy luxry. Our exceptional matrix is structed to help you make more money in little time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="inner-content">
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="inner">
+                                <div class="icon-box"><i class="flaticon-rocket"></i></div>
+                                <p>Luxury Vacations (Both Local & Abroad).</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-one wow fadeInUp animated animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="inner">
+                                <div class="icon-box"><i class="flaticon-innovation-1"></i></div>
+                                <p>Acquisition of High Income Skills (HIS).</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-one wow fadeInUp animated animated" data-wow-delay="600ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="inner">
+                                <div class="icon-box"><i class="flaticon-presentation"></i></div>
+                                <p>No Buying, No Selling, Passive Income.</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="inner">
+                                <div class="icon-box"><i class="flaticon-target"></i></div>
+                                <p>No Demotion & No Targets.</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-one wow fadeInUp animated animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="inner">
+                                <div class="icon-box"><i class="flaticon-idea"></i></div>
+                                <p>Luxury Assets (Watches, Laptops, Smart Phones, Etc).</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 service-block">
+                    <div class="service-block-one wow fadeInUp animated animated" data-wow-delay="600ms" data-wow-duration="1500ms">
+                        <div class="inner-box">
+                            <div class="inner">
+                                <div class="icon-box"><i class="flaticon-search"></i></div>
+                                <p>Registration is Once & International</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- service-section end -->
+
+
+<!-- annual-stats -->
+<section class="annual-stats">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-6 col-md-12 col-sm-12 content-column">
+                <div id="content_block_two">
+                    <div class="content-box">
+                        <div class="sec-title left">
+                            <h5>UNIQUE US</h5>
+                            <h2>WHAT MAKES US UNIQUE</h2>
+                        </div>
+                        <div class="text">
+                            <p> Members will have access to a
+wide range of business e-books and internet marketing courses
+which will go a long way to enhance their skills, and make them
+fit into the marketplace.</p>
+        <p> Founded in 2022 (Pre-Launch), We are Africa's first One Link Network, No Compulsory Recruiting, Huge Digital Library (PDF & Videos), Strict Application of Synergy, No One is Left Behind (We All Win), No Selling of any Sort Ever!, Huge Incentive (Cars, Houses, Laptops Etc).</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 image-column">
+                <div id="image_block_one">
+                    <div class="image-box">
+                        <div class="pattern-layer" style="background-image: url(lanasset/images/shape/shape-1.png);"></div>
+                        <figure class="image"><img src="lanasset/images/resource/state-1.jpg" alt=""></figure>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- annual-stats end -->
+
+
+<!-- world-cyber -->
+<section class="world-cyber bg-color-1 p-10">
+ 
+  
+</section>
+<!-- world-cyber end -->
+
+
+<!-- support-section -->
+<section class="support-section">
+    <div class="auto-container">
+        <div class="inner-container">
+            <div class="row clearfix">
+                <div class="col-lg-7 col-md-12 col-sm-12 inner-column">
+                    <div class="inner-box">
+                        <div class="sec-title light left">
+                            <h5>Join EPG Today</h5>
+                            <h2>Start Building Capacity</h2>
+                            <p>Provide some basic information to get you started on the EPG Network.</p>
+                        </div>
+                        <form action="account/signup.php" method="post" class="submit-form">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Your Name" required="">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Email address" required="">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="phone" placeholder="Phone" required="">
+                            </div>
+                            
+                            <div class="form-group message-btn">
+                                <button type="submit" class="theme-btn style-one">Get Started</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12 col-sm-12 info-column">
+                    <div class="info-inner">
+                        <figure class="image-box"><img src="lanasset/images/resource/info-1.jpg" alt=""></figure>
+                        <div class="info-box">
+                         
+                            <div class="icon-box"><i class="fas fa-phone"></i></div>
+                            <h2><a href="tel:2349038772366">234-903-877-2366</a></h2>
+                            <div class="email"><a href="mailto:support@excelplusglobal.com">support@excelplusglobal.com</a></div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- support-section end -->
+
+
+<!-- testimonial-section -->
+<section class="testimonial-section" style="background-image: url(lanasset/images/background/testimonial-bg.jpg);">
+    
+   
+</section>
+<!-- testimonial-section end -->
+
+
+<!-- news-section end -->
+
+
+
+
+
+<!-- main-footer -->
+<footer class="main-footer">
+  
+    <div class="footer-bottom">
+        <div class="auto-container">
+            <div class="copyright"><p>&copy; <?= date('Y') ?>. EPG MArketing Ltd. All rights reserved.</p></div>
+        </div>
+    </div>
+</footer>
+<!-- main-footer end -->
+
+
+
+<!--Scroll to top-->
+<button class="scroll-top scroll-to-target" data-target="html">
+    <span class="fa fa-arrow-up"></span>
+</button>
+
+
+
+<!-- END sidebar widget item -->
+
+
+<!-- jequery plugins -->
+<script src="lanasset/js/jquery.js"></script>
+<script src="lanasset/js/popper.min.js"></script>
+<script src="lanasset/js/bootstrap.min.js"></script>
+<script src="lanasset/js/owl.js"></script>
+<script src="lanasset/js/wow.js"></script>
+<script src="lanasset/js/validation.js"></script>
+<script src="lanasset/js/jquery.fancybox.js"></script>
+<script src="lanasset/js/appear.js"></script>
+<script src="lanasset/js/jquery.countTo.js"></script>
+<script src="lanasset/js/scrollbar.js"></script>
+<script src="lanasset/js/nav-tool.js"></script>
+<script src="lanasset/js/TweenMax.min.js"></script>
+<script src="lanasset/js/circle-progress.js"></script>
+<script src="lanasset/js/jquery.nice-select.min.js"></script>
+
+<!-- main-js -->
+<script src="lanasset/js/script.js"></script>
+
+</body><!-- End of .page_wrapper -->
 
 </html>

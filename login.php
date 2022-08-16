@@ -1,3 +1,8 @@
+<?php
+session_start(); ob_start();  
+require_once('account/includes/connection.php');
+if(isset($_SESSION['user_id'])){header('location: account/'); }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-    <title>Sign Up</title>
+    <title>Log In</title>
 
 <!-- Fav Icon
 <link rel="icon" href="lanasset/images/favicon.ico" type="image/x-icon">
@@ -27,6 +32,18 @@
 <link href="lanasset/css/style.css" rel="stylesheet">
 <link href="lanasset/css/responsive.css" rel="stylesheet">
 
+<style type="text/css">
+  .inner-container .inner-box .submit-form .form-group input[type='password']{
+  position: relative;
+  width: 100%;
+  height: 55px;
+  background: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: 2px solid #fff;
+  transition: all 500ms ease;
+}
+</style>
 </head>
 
 
@@ -56,9 +73,9 @@
   <section class="page-title centred" style="background-image: url(lanasset/images/banner/banner-9.jpg);">
         <div class="auto-container">
             <div class="content-box clearfix">
-                <h1>Sign Up</h1>
+                <h1>Log In</h1>
                 <ul class="bread-crumb clearfix">
-                    <li><a href="javascript:;">Join us for a world of endless opportunities</a></li>
+                    <li><a href="javascript:;">Log in to manage your account information</a></li>
                 </ul>
             </div>
         </div>
@@ -80,42 +97,30 @@
     <div class="auto-container">
         <div class="inner-container">
             <div class="row clearfix">
-                <div class="col-lg-7 col-md-12 col-sm-12 inner-column">
+                <div class="col-lg-6 col-md-12 col-sm-12 inner-column">
                     <div class="inner-box">
                         <div class="sec-title light left">
-                            <h5>Join EPG Today</h5>
-                            <h2>Start Creating Wealth</h2>
-                            <p>Provide some information to get you started on the EPG Network.</p>
+                            <h5>Welcome Back</h5>
+                            <h2>Log In</h2>
+                            <p> Log in to start your session</p>
                         </div>
-                        <form action="account/signup.php" method="post" class="submit-form">
-                            <div class="form-group">
-                                <input type="text" name="name" placeholder="Your Name" required="">
-                            </div>
-                             <div class="form-group">
-                                <input type="text" name="phone" placeholder="Phone" required="">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="sponsor" placeholder="Referral ID">
-                            </div>
+                        	<?php if(isset($report)){ $pro->Alert();} ?>
+                        <form method="post" class="submit-form">
                            
-                            
                             <div class="form-group">
                                 <input type="text" name="username" placeholder="Username" required="">
                             </div>
                             <div class="form-group">
-                                <input type="email" name="email" placeholder="Email address" required="">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="password" placeholder="Password" required="">
+                                <input type="password" name="password" placeholder="Password" required="">
                             </div>
                             
                             <div class="form-group message-btn">
-                                <button type="submit" class="theme-btn style-one">Get Started</button>
+                                <button type="submit" class="theme-btn style-one" name="LoginUsers">Log In</button>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-12 col-sm-12 info-column">
+                <div class="col-lg-6 col-md-12 col-sm-12 info-column">
                     <div class="info-inner">
                         <figure class="image-box"><img src="lanasset/images/resource/info-1.jpg" alt=""></figure>
                         <div class="info-box" class="height:100%">
